@@ -1,0 +1,13 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BuggyTasks.ViewModels"
+             x:Class="BuggyTasks.Views.DeviceInfoPage"
+             Title="Device Info">
+    <ContentPage.BindingContext>
+        <vm:DeviceInfoViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout Padding="30">
+        <Label Text="{Binding Model, StringFormat='Model: {0}'}" />
+        <Label Text="{Binding Platform, StringFormat='Platform: {0}'}" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -10,18 +10,30 @@ public partial class LocationPage : ContentPage
         InitializeComponent();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        GetLocation(); 
+        await GetLocation(); 
     }
 
-    Task GetLocation()
+    async Task GetLocation()
     {
-        var location =  Geolocation.GetLastKnownLocationAsync(); 
-        if (location != null)
+        try
         {
-            Console.WriteLine($"Lat: {location.Latitude}, Long: {location.Longitude}");
+            var location = await Geolocation.GetLastKnownLocationAsync();
+            if (location != null)
+            {
+                Console.WriteLine($"Lat: {location.Latitude}, Long: {location.Longitude}");
+                LocationLabel.Text = $"Lat: {location.Latitude}, Long: {location.Longitude}";
+            }
+            else
+            {
+                LocationLabel.Text = "Could not get last known location";
+            }
+        }
+        catch (Exception ex)
+        {
+            LocationLabel.Text = ex.Message;
         }
     }
 }
